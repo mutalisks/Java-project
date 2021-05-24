@@ -17,13 +17,11 @@ String path = request.getContextPath();
 	//只允许上载此类文件
 	try 
 	{
-		//mySmartUpload.setAllowedFilesList("jpg,Jpg,JPG,GIF,gif,Gif,png");
 		mySmartUpload.upload();
 	} 
 	catch (Exception e)
     {
-		//out.println("<script language=javascript>alert('上传格式错误！');   history.back(-1);</script>");
-		//return;
+		return;
 	}
 	
 	try 
@@ -37,25 +35,18 @@ String path = request.getContextPath();
 		   } 
 		   else 
 		   {
-			   int file_size = myFile.getSize(); //取得文件的大小 (单位是b) 
+			   int file_size = myFile.getSize();
 			   file_name=myFile.getFileName();
 			   System.out.println("サイズ："+file_size+"名前："+file_name);
-			   //if (file_size > 10*1024*1024)
-			   //{
-				  //out.println("<script language=javascript>alert('上传图片大小应控制在10K~1M之间！');   history.back(-1);</script>");
-				  //return;
-			   //}
-               //else
-               //{
+
                    newFile1Name=new Date().getTime()+file_name.substring(file_name.indexOf("."));
 	               System.out.println("あたらしいファイルの名前："+newFile1Name);
 				
 				   String saveurl = request.getSession().getServletContext().getRealPath("upload");
 				
 				   saveurl = saveurl+"/"+newFile1Name;
-				   myFile.saveAs(saveurl, mySmartUpload.SAVE_PHYSICAL);
-	
-              // }
+				   myFile.saveAs(saveurl, SmartUpload.SAVE_PHYSICAL);
+
 			} 
 	  } 
 	  catch (Exception e)
@@ -66,7 +57,7 @@ String path = request.getContextPath();
 
 <script language="javascript">
 
-    var str=location.toString()
+    var str=location.toString();
     var Result=((((str.split('?'))[1]).split('='))[1]);
 	//window.opener.Form1(Result).focus();	
 	window.parent.document.getElementById(Result).value="upload/<%= newFile1Name%>";					

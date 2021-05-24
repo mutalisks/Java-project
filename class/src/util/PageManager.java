@@ -4,7 +4,6 @@ package util;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -142,15 +141,14 @@ public class PageManager {
 	/**
 	 * 
 	 * @param 查询条件集合
-	 *            如没有条件只是列表就不使用这个方法
+	 *
 	 */
 	public void addParameter(List parameter) {
 
-		StringBuffer para = new StringBuffer("");
+		StringBuilder para = new StringBuilder("");
 		if (parameter != null && parameter.size() != 0) {
-			Iterator iterator = parameter.iterator();
-			while (iterator.hasNext()) {
-				para.append("&").append(iterator.next().toString());
+			for (Object o : parameter) {
+				para.append("&").append(o.toString());
 			}
 		}
 		this.parameter = para.toString();
@@ -162,7 +160,7 @@ public class PageManager {
 	 * 
 	 */
 	protected void refreshUrl() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("<font color='#1157B7'>for ").append(count);
 		buf.append(" together");
 		buf.append("&nbsp;&nbsp;");
@@ -243,11 +241,9 @@ public class PageManager {
 				.append("\">");
 		for (int i = 0; i < this.pageNumber; i++) {
 			if (this.currentPage == i + 1)
-				buf.append("<option value=" + (i + 1)
-						+ " selected=\"selected\">" + (i + 1) + "</option>");
+				buf.append("<option value=").append(i + 1).append(" selected=\"selected\">").append(i + 1).append("</option>");
 			else
-				buf.append("<option value=" + (i + 1) + ">" + (i + 1)
-						+ "</option>");
+				buf.append("<option value=").append(i + 1).append(">").append(i + 1).append("</option>");
 
 		}
 		buf.append("</select>");
@@ -279,14 +275,14 @@ public class PageManager {
 		return info;
 	}
 	
-	public static ArrayList<HashMap> getPages(String url,int pagesize,String sql,HttpServletRequest request )
+	public static ArrayList getPages(String url, int pagesize, String sql, HttpServletRequest request )
 	{
 	     
 		PageManager pageManager = PageManager.getPage(url, pagesize, request);
 		  pageManager.doList(sql);
 		  PageManager bean = (PageManager) request.getAttribute("page");
 		 
-		  ArrayList<HashMap> nlist = (ArrayList) bean.getCollection();
+		  ArrayList nlist = (ArrayList) bean.getCollection();
 		  return nlist;
 	}
 

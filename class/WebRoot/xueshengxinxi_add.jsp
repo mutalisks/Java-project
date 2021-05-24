@@ -87,7 +87,7 @@ new CommDAO().insert(request,response,"xueshengxinxi",ext,true,false,"");
  
 	var xuehaoobj = document.getElementById("xuehao"); if(xuehaoobj.value==""){document.getElementById("clabelxuehao").innerHTML="&nbsp;&nbsp;<font color=red>学籍番号を入れてください</font>";return false;}else{document.getElementById("clabelxuehao").innerHTML="  "; }
 	var xuehaoobj = document.getElementById("xuehao");  
-if(xuehaoobj.value!=""){  
+if(xuehaoobj.value!==""){
 var ajax = new AJAX();
 ajax.post("factory/checkno.jsp?table=xueshengxinxi&col=xuehao&value="+xuehaoobj.value+"&checktype=insert&ttime=<%=Info.getDateStr()%>") 
 var msg = ajax.getValue();
@@ -97,13 +97,13 @@ return false;
 }else{document.getElementById("clabelxuehao").innerHTML="  ";  
 }  
 } 
-	var mimaobj = document.getElementById("mima"); if(mimaobj.value==""){document.getElementById("clabelmima").innerHTML="&nbsp;&nbsp;<font color=red>パスワードを入れてください</font>";return false;}else{document.getElementById("clabelmima").innerHTML="  "; }
-	var xingmingobj = document.getElementById("xingming"); if(xingmingobj.value==""){document.getElementById("clabelxingming").innerHTML="&nbsp;&nbsp;<font color=red>氏名を入れてください</font>";return false;}else{document.getElementById("clabelxingming").innerHTML="  "; }
-	var xingbieobj = document.getElementById("xingbie"); if(xingbieobj.value==""){document.getElementById("clabelxingbie").innerHTML="&nbsp;&nbsp;<font color=red>性別を入れてください</font>";return false;}else{document.getElementById("clabelxingbie").innerHTML="  "; }
-	var yuanxiobj = document.getElementById("yuanxi"); if(yuanxiobj.value==""){document.getElementById("clabelyuanxi").innerHTML="&nbsp;&nbsp;<font color=red>学部を入れてください</font>";return false;}else{document.getElementById("clabelyuanxi").innerHTML="  "; }
-	var zhuanyeobj = document.getElementById("zhuanye"); if(zhuanyeobj.value==""){document.getElementById("clabelzhuanye").innerHTML="&nbsp;&nbsp;<font color=red>学科を入れてください</font>";return false;}else{document.getElementById("clabelzhuanye").innerHTML="  "; }
-	var shoujiobj = document.getElementById("shouji"); if(shoujiobj.value==""){document.getElementById("clabelshouji").innerHTML="&nbsp;&nbsp;<font color=red>携帯電話を入れてください</font>";return false;}else{document.getElementById("clabelshouji").innerHTML="  "; }
-	var shoujiobj = document.getElementById("shouji"); if(shoujiobj.value!=""){ if(/^0[7|8|9][0-9]{9}$/.test(shoujiobj.value)){document.getElementById("clabelshouji").innerHTML=""; }else{document.getElementById("clabelshouji").innerHTML="&nbsp;&nbsp;<font color=red>正しい携帯電話ではありません</font>"; return false;}}
+	var mimaobj = document.getElementById("mima"); if(mimaobj.value===""){document.getElementById("clabelmima").innerHTML="&nbsp;&nbsp;<font color=red>パスワードを入れてください</font>";return false;}else{document.getElementById("clabelmima").innerHTML="  "; }
+	var xingmingobj = document.getElementById("xingming"); if(xingmingobj.value===""){document.getElementById("clabelxingming").innerHTML="&nbsp;&nbsp;<font color=red>氏名を入れてください</font>";return false;}else{document.getElementById("clabelxingming").innerHTML="  "; }
+	var xingbieobj = document.getElementById("xingbie"); if(xingbieobj.value===""){document.getElementById("clabelxingbie").innerHTML="&nbsp;&nbsp;<font color=red>性別を入れてください</font>";return false;}else{document.getElementById("clabelxingbie").innerHTML="  "; }
+	var yuanxiobj = document.getElementById("yuanxi"); if(yuanxiobj.value===""){document.getElementById("clabelyuanxi").innerHTML="&nbsp;&nbsp;<font color=red>学部を入れてください</font>";return false;}else{document.getElementById("clabelyuanxi").innerHTML="  "; }
+	var zhuanyeobj = document.getElementById("zhuanye"); if(zhuanyeobj.value===""){document.getElementById("clabelzhuanye").innerHTML="&nbsp;&nbsp;<font color=red>学科を入れてください</font>";return false;}else{document.getElementById("clabelzhuanye").innerHTML="  "; }
+	var shoujiobj = document.getElementById("shouji"); if(shoujiobj.value===""){document.getElementById("clabelshouji").innerHTML="&nbsp;&nbsp;<font color=red>携帯電話を入れてください</font>";return false;}else{document.getElementById("clabelshouji").innerHTML="  "; }
+	var shoujiobj = document.getElementById("shouji"); if(shoujiobj.value!==""){ if(/^0[7|8|9]0[0-9]{8}$/.test(shoujiobj.value)){document.getElementById("clabelshouji").innerHTML=""; }else{document.getElementById("clabelshouji").innerHTML="&nbsp;&nbsp;<span style="color: red; ">有効な電話番号を入れてください</span>"; return false;}}
     
 
 

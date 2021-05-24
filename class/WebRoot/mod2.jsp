@@ -14,25 +14,25 @@
 <script>
 function check()
 {
-	if(document.form1.ymm.value=="")
+	if(document.form1.ymm.value==="")
 	{
 		alert("政婓及由旦伐奈玉");
 		document.form1.ymm.focus();
 		return false;
 	}
-	if(document.form1.xmm1.value=="")
+	if(document.form1.xmm1.value==="")
 	{
 		alert("丐凶日仄中由旦伐奈玉");
 		document.form1.xmm1.focus();
 		return false;
 	}
-	if(document.form1.xmm2.value=="")
+	if(document.form1.xmm2.value==="")
 	{
 		alert("丐凶日仄中由旦伐奈玉(復庲蚚)");
 		document.form1.xmm2.focus();
 		return false;
 	}
-	if (document.form1.xmm1.value!=document.form1.xmm2.value)
+	if (document.form1.xmm1.value!==document.form1.xmm2.value)
 	{
 		alert("由旦伐奈玉反珨祡仄化中引六氏");
 		document.form1.xmm1.value="";

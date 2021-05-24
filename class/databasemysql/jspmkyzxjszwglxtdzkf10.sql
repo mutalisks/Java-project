@@ -18,7 +18,7 @@ CREATE TABLE `allusers` (
 -- ----------------------------
 -- Records of allusers
 -- ----------------------------
-INSERT INTO `allusers` VALUES ('1', 'hsg', 'hsg', '超级管理员', '2018-03-26 21:06:12');
+INSERT INTO `allusers` VALUES ('1', 'hsg', 'hsg', '超级管理员', '2021-05-22 21:06:12');
 
 -- ----------------------------
 -- Table structure for `gonggaoxinxi`

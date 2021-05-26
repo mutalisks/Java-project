@@ -41,11 +41,11 @@
   	 new CommDAO().delete(request,"quxiao"); 
     String url = "quxiao_list.jsp?1=1"; 
     String sql =  "select * from quxiao where 1=1";
-	
-if(request.getParameter("yuyuedanhao").equals("") ||request.getParameter("yuyuedanhao")==null ){}else{sql=sql+" and yuyuedanhao like '%"+request.getParameter("yuyuedanhao")+"%'";}
-if(request.getParameter("xinxibianhao").equals("") ||request.getParameter("xinxibianhao")==null ){}else{sql=sql+" and xinxibianhao like '%"+request.getParameter("xinxibianhao")+"%'";}
-if(request.getParameter("zuoweihao").equals("") ||request.getParameter("zuoweihao")==null ){}else{sql=sql+" and zuoweihao like '%"+request.getParameter("zuoweihao")+"%'";}
-if(request.getParameter("xuehao").equals("") ||request.getParameter("xuehao")==null ){}else{sql=sql+" and xuehao like '%"+request.getParameter("xuehao")+"%'";}
+
+    if(request.getParameter("yuyuedanhao")=="" ||request.getParameter("yuyuedanhao")==null ){}else{sql=sql+" and yuyuedanhao like '%"+request.getParameter("yuyuedanhao")+"%'";}
+    if(request.getParameter("xinxibianhao")=="" ||request.getParameter("xinxibianhao")==null ){}else{sql=sql+" and xinxibianhao like '%"+request.getParameter("xinxibianhao")+"%'";}
+    if(request.getParameter("zuoweihao")=="" ||request.getParameter("zuoweihao")==null ){}else{sql=sql+" and zuoweihao like '%"+request.getParameter("zuoweihao")+"%'";}
+    if(request.getParameter("xuehao")=="" ||request.getParameter("xuehao")==null ){}else{sql=sql+" and xuehao like '%"+request.getParameter("xuehao")+"%'";}
     sql+=" order by id desc";
 	ArrayList<HashMap> list = PageManager.getPages(url,15,sql, request); 
 	int i=0;

@@ -35,19 +35,17 @@
 
 
   	 new CommDAO().delete(request,"gonggaoxinxi"); 
-    String url = "gonggaoxinxi_list.jsp?1=1"; 
+    String url = "gonggaoxinxi_list.jsp?1=1";
     String sql =  "select * from gonggaoxinxi where 1=1";
 	
-if(request.getParameter("biaoti").equals("") ||request.getParameter("biaoti")==null ){}else{sql=sql+" and biaoti like '%"+request.getParameter("biaoti")+"%'";}
-if(request.getParameter("fenlei").equals("") ||request.getParameter("fenlei")==null ){}else{sql=sql+" and fenlei like '%"+request.getParameter("fenlei")+"%'";}
-if(request.getParameter("tianjiaren").equals("") ||request.getParameter("tianjiaren")==null ){}else{sql=sql+" and tianjiaren like '%"+request.getParameter("tianjiaren")+"%'";}
+if(request.getParameter("biaoti")=="" ||request.getParameter("biaoti")==null ){}else{sql=sql+" and biaoti like '%"+request.getParameter("biaoti")+"%'";}
+if(request.getParameter("fenlei")=="" ||request.getParameter("fenlei")==null ){}else{sql=sql+" and fenlei like '%"+request.getParameter("fenlei")+"%'";}
+if(request.getParameter("tianjiaren")=="" ||request.getParameter("tianjiaren")==null ){}else{sql=sql+" and tianjiaren like '%"+request.getParameter("tianjiaren")+"%'";}
     sql+=" order by id desc";
 	ArrayList<HashMap> list = PageManager.getPages(url,15,sql, request);
 	int i=0;
 	for(HashMap map:list){ 
 	i++;
-	
-	
 
 
      %>

@@ -1,4 +1,3 @@
-<jsp:useBean id="page" scope="request" type="com.sun.media.sound.DLSSample"/>
 <%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
 <%@page import="util.Info"%>
 <%@page import="dao.CommDAO"%>

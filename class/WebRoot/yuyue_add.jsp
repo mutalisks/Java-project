@@ -1,7 +1,7 @@
-<%@ page language="java" import="dao.CommDAO" pageEncoding="gbk"%>
+<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
 <%@page import="util.Info"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.List"%>
+<%@page import="dao.CommDAO"%>
+<%@page import="util.PageManager"%>
 <html>
   <head>
     
@@ -13,7 +13,7 @@
 	   
   </head>
 <%
-  String id="";
+  String id;
   id=request.getParameter("id");
  HashMap mlbdq = new CommDAO().getmap(id,"jiaoshixinxi");
  String xinxibianhao="";
@@ -43,7 +43,7 @@
   
 String sql3=  "select * from yuyue where xinxibianhao='"+request.getParameter("xinxibianhao")+"' and yuyueshijian='"+request.getParameter("yuyueshijian")+"'";
 CommDAO dao = new CommDAO();
-  List<HashMap> userlist1 = dao.select(sql3);
+  List<HashMap<String, String>> userlist1 = dao.select(sql3);
 
   if(userlist1.size()==1)
 {

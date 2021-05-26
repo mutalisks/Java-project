@@ -111,7 +111,7 @@ new CommDAO().insert(request,response,"xueshengxinxi",ext,true,false,"");
     function checkform() {
 
         var xuehaoobj = document.getElementById("xuehao");
-        if (xuehaoobj.value == "") {
+        if (xuehaoobj.value === "") {
             document.getElementById("clabelxuehao").innerHTML = "&nbsp;&nbsp;<font color=red>僥汐桑催を秘れてください</font>";
             return false;
         } else {

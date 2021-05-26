@@ -1,7 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
+<%@ page language="java" import="dao.CommDAO" pageEncoding="gbk"%>
 <%@page import="util.PageManager"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 <html>
   <head>
     <title>ังษ๚ว้๓</title>

@@ -1,22 +1,22 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gb2312"%>
+<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
 <%@page import="dao.CommDAO"%>
 <%@page import="util.Info"%>
 <%
 String table = request.getParameter("table")==null?"":request.getParameter("table");
 String col = request.getParameter("col")==null?"":request.getParameter("col");
 String value = request.getParameter("value")==null?"":request.getParameter("value");
-String checktype = request.getParameter("checktype")==null?"":request.getParameter("checktype");
-String valuecopy = "";
+String checktype = request.getParameter("checkstyle")==null?"":request.getParameter("checktype");
+StringBuilder valuecopy = new StringBuilder();
 for(String str:value.split(","))
 {
 if(str.startsWith("sysuser-"))
 {
-str = Info.getUser(request).get(str.split("-")[1]).toString();
+str = Info.getUser(request).get(str.split("-")[1]);
 }
-valuecopy+=str+",";
+valuecopy.append(str).append(",");
 }
-if(valuecopy.length()>1)valuecopy=valuecopy.substring(0,valuecopy.length()-1);
-value = valuecopy;
+if(valuecopy.length()>1) valuecopy = new StringBuilder(valuecopy.substring(0, valuecopy.length() - 1));
+value = valuecopy.toString();
 if(checktype.equals("insert"))
 {
 value = Info.getGBKStr(value);
@@ -51,7 +51,7 @@ if(checktype.equals("zhinsert"))
 {
 value = Info.getGBKStr(value);
 System.out.println(value);
-String sql = "select * from "+table+" where 1=1 ";
+StringBuilder sql = new StringBuilder("select * from " + table + " where 1=1 ");
 String[] cols = col.split(",");
 String[] values = value.split(",");
 for(int i=0;i<cols.length;i++)
@@ -60,10 +60,10 @@ String pcol = cols[i]==null?"":cols[i];
 String pvalue = values[i]==null?"":values[i];
 if(pcol.equals(""))continue;
 if(pvalue.equals(""))continue;
-sql+=" and "+pcol+"='"+pvalue+"' " ;
+sql.append(" and ").append(pcol).append("='").append(pvalue).append("' ");
 }
 System.out.println(sql);
-List list = new CommDAO().select(sql);
+List list = new CommDAO().select(sql.toString());
 if(list.size()>0)
 {
 out.print("Y");
@@ -92,7 +92,7 @@ if(checktype.equals("zhupdate"))
 {
 String id = request.getParameter("id")==null?"":request.getParameter("id");
 value = Info.getGBKStr(value);
-String sql = "select * from "+table+" where 1=1 ";
+StringBuilder sql = new StringBuilder("select * from " + table + " where 1=1 ");
 String[] cols = col.split(",");
 String[] values = value.split(",");
 for(int i=0;i<cols.length;i++)
@@ -101,11 +101,11 @@ String pcol = cols[i]==null?"":cols[i];
 String pvalue = values[i]==null?"":values[i];
 if(pcol.equals(""))continue;
 if(pvalue.equals(""))continue;
-sql+=" and "+pcol+"='"+pvalue+"' " ;
+sql.append(" and ").append(pcol).append("='").append(pvalue).append("' ");
 }
-sql+=" and id!="+id;
+sql.append(" and id!=").append(id);
 System.out.println(sql);
-List list = new CommDAO().select(sql);
+List list = new CommDAO().select(sql.toString());
  
 if(list.size()>0)
 {

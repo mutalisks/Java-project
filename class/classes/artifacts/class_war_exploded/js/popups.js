@@ -10,12 +10,6 @@ function popclose()
 var a = parent.document.getElementById("dialogBoxClose");
 a.click();
 }
-
-function uploadimg()
-{
-pop("js/uploadimg.jsp","ÉÏ´«Í¼Æ¬",300,77)
-}
-
 function pop(purl,ptitle,pwidth,pheight)
 {
                   var pop=new Popup({ contentType:1,isReloadOnClose:false,width:pwidth,height:pheight});

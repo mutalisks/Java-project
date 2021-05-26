@@ -1,7 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ page language="java" import="dao.CommDAO" pageEncoding="gbk"%>
 <%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
-<%@page import="util.PageManager"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
 <html>
   <head>
     
@@ -105,37 +105,32 @@ new CommDAO().insert(request,response,"yuyue",ext,true,false,"");
 		<tr><td  width="200">Óè¼s·¬ºÅ£º</td><td><input name='yuyueshijian' type='text' id='yuyueshijian' value='' onblur='' readonly='readonly' onClick="WdatePicker({'dateFmt':'yyyy-MM-dd HH:mm:ss'})" style='width:120px; height:16px; border:solid 1px #000000; color:#666666'/></td></tr>
 		<tr><td  width="200">Ñ§¼®·¬ºÅ£º</td><td><input name='xuehao' type='text' id='xuehao' onblur='' style='border:solid 1px #000000; color:#666666' value='<%=request.getSession().getAttribute("username")%>' readonly="readonly" /></td></tr>
 		<tr><td  width="200">ÊÏÃû£º</td><td><input name='xingming' type='text' id='xingming' value='' onblur='' style='border:solid 1px #000000; color:#666666' /></td></tr><script language="javascript">document.form1.xingming.value='<%=xingming%>';document.form1.xingming.setAttribute("readOnly",'true');</script>
-		<tr><td  width="200">Ð¯Ž¡ëŠÔ’£º</td><td><input name='shouji' type='text' id='shouji' value='' onblur='' style='border:solid 1px #000000; color:#666666' /></td></tr><script language="javascript">document.form1.shouji.value='<%=shouji%>';document.form1.shouji.setAttribute("readOnly",'true');</script>
-		
-    <tr>
-      <td>&nbsp;</td>
-      <td><input type="submit" name="Submit" value="submit"  style='border:solid 1px #000000; color:#666666' />
-      <input type="reset" name="Submit2" value="reset" style='border:solid 1px #000000; color:#666666' /></td>
-    </tr>
-  </table>
-</form>
+		<tr><td  width="200">Ð¯Ž¡ëŠÔ’£º</td><td><input name='shouji' type='text' id='shouji' value='' onblur='' style='border:solid 1px #000000; color:#666666' /></td></tr><script language="javascript">document.form1.shouji.value='<%=shouji%>';
+   document.form1.shouji.setAttribute("readOnly", 'true');</script>
+
+       <tr>
+           <td>&nbsp;</td>
+           <td><input type="submit" name="Submit" value="submit" style='border:solid 1px #000000; color:#666666'/>
+               <input type="reset" name="Submit2" value="reset" style='border:solid 1px #000000; color:#666666'/></td>
+       </tr>
+   </table>
+ </form>
 
   </body>
 </html>
 
 
-
-
 <script language=javascript src='js/ajax.js'></script>
 
-<%@page import="java.util.ArrayList"%> 
-<%@page import="java.util.HashMap"%> 
+<script language=javascript>
 
-<script language=javascript >  
- 
- function checkform(){  
- 
-	
+    function checkform() {
 
 
-return true;   
-}   
-popheight=450;
+        return true;
+    }
+
+    popheight = 450;
 </script>  
 
 

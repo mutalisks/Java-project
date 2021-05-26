@@ -1,18 +1,15 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
-<%@page import="util.PageManager"%>
+<%@ page language="java" import="dao.CommDAO" pageEncoding="gbk"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    
-    <title>バックアップ</title>
-    
+<head>
 
-  </head>
-  
-  <body>
-  <%
+    <title>バックアップ</title>
+
+
+</head>
+
+<body>
+<%
  
 if (request.getSession().getAttribute("cx").equals("砿尖宀"))
 {

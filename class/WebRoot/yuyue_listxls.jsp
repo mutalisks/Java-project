@@ -34,10 +34,7 @@ response.addHeader("Content-Disposition", "attachment;filename=yuyue.xls");
     
 
   </tr>
-  <% 
-  	//difengysfiqfgieuheze
-//youzuiping1
-//txixixngdy
+  <%
     String url = "yuyue_list.jsp?1=1"; 
     String sql =  "select * from yuyue where 1=1";
     sql+=" order by id desc";
@@ -45,10 +42,6 @@ response.addHeader("Content-Disposition", "attachment;filename=yuyue.xls");
 	int i=0;
 	for(HashMap map:list){ 
 	i++;
-	//wxflzhistri
-	//zoxngxetxoxngjxvi
-//txixgihxngjs
-//youzuiping2
      %>
   <tr>
     <td width="30" align="center"><%=i %></td>

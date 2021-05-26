@@ -25,6 +25,7 @@ import jxl.Workbook;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.RequestContext;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -42,8 +43,7 @@ public class MainCtrl extends HttpServlet {
 	}
 
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -56,9 +56,7 @@ public class MainCtrl extends HttpServlet {
 		{
 		try {
 			request.getRequestDispatcher(url).forward(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}
 		}
@@ -75,17 +73,14 @@ public class MainCtrl extends HttpServlet {
 		}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws IOException {
         response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String ac = request.getParameter("ac");
 		if(ac==null)ac="";
 		CommDAO dao = new CommDAO();
-		String date = Info.getDateStr();
-		String today = date.substring(0,10);
-		String tomonth = date.substring(0,7);
-		
-		 
+
+
 		if(ac.equals("login"))
 		{
 			String username = request.getParameter("username");
@@ -109,7 +104,7 @@ public class MainCtrl extends HttpServlet {
 				{
 					sql1 = "select * from yuangongxinxi where gonghao='"+username+"' and mima='"+password+"'"; 
 				}
-			List<HashMap> userlist1 = dao.select(sql1);
+			List<HashMap<String, String>> userlist1 = dao.select(sql1);
 			if(userlist1.size()==1)
 			{
 				if (utype.equals("注册用户"))
@@ -155,10 +150,7 @@ public class MainCtrl extends HttpServlet {
 				{
 					sql1 = "select * from allusers where username='"+username+"' and pwd='"+password+"'"; 
 				}
-			
-			
-			//	String sql1 = "select * from allusers where username='"+username+"' and pwd='"+password+"'  "; 
-			List<HashMap> userlist1 = dao.select(sql1);
+			List<HashMap<String, String>> userlist1 = dao.select(sql1);
 			if(userlist1.size()==1)
 			{
 			if (utype.equals("学生"))
@@ -172,39 +164,29 @@ public class MainCtrl extends HttpServlet {
 					request.getSession(). setAttribute("username", userlist1.get(0).get("username"));  
 				request.getSession(). setAttribute("cx",  userlist1.get(0).get("cx")); 
 				}
-				 
-			
-				 
 				gor("main.jsp", request, response);
 			}else{
 				request.setAttribute("error", "");
 				go("/login.jsp", request, response);
 			}
-			
-			
-			
 			}
 		}
-		
 		
 		//修改密码
 		if(ac.equals("uppass"))
 		{
 			String olduserpass = request.getParameter("ymm");
 			String userpass = request.getParameter("xmm1");
-			String copyuserpass = request.getParameter("xmm2");   
-			HashMap m = dao.getmaps("yonghuming",(String)request.getSession().getAttribute("username"), "yonghuzhuce");
-			if(!(((String)m.get("mima")).equals(olduserpass)))
+			HashMap<String,String> m = dao.getmaps("yonghuming",(String)request.getSession().getAttribute("username"), "yonghuzhuce");
+			if(!(m.get("mima").equals(olduserpass)))
 			{
 				request.setAttribute("error", "");
-				go("mod2.jsp", request, response);
 			}else{
-			//String id = (String)user.get("id");
 			String sql = "update yonghuzhuce set mima='"+userpass+"' where yonghuming='"+(String)request.getSession().getAttribute("username")+"'";
 			dao.commOper(sql);
 			request.setAttribute("suc", "");
-			go("mod2.jsp", request, response);
 			}
+			go("mod2.jsp", request, response);
 		}
 		 
 		 //修改密码
@@ -212,21 +194,19 @@ public class MainCtrl extends HttpServlet {
 		{
 			String olduserpass = request.getParameter("ymm");
 			String userpass = request.getParameter("xmm1");
-			String copyuserpass = request.getParameter("xmm2");   
-			//println(Info.getUser(request).get("id").toString());
-			HashMap m = dao.getmaps("username",(String)request.getSession().getAttribute("username"), "allusers");
+			String copyuserpass = request.getParameter("xmm2");
+			HashMap<String,String> m = dao.getmaps("username",(String)request.getSession().getAttribute("username"), "allusers");
 			
-			if(!(((String)m.get("pwd")).equals(olduserpass)))
+			if(!((m.get("pwd")).equals(olduserpass)))
 			{
 				request.setAttribute("error", "");
-				go("mod.jsp", request, response);
 			}else{
 			//String id = (String)user.get("id");
 			String sql = "update allusers set pwd='"+userpass+"' where username='"+(String)request.getSession().getAttribute("username")+"'";
 			dao.commOper(sql);
 			request.setAttribute("suc", "");
-			go("mod.jsp", request, response);
 			}
+			go("mod.jsp", request, response);
 		}
 		 
 		
@@ -238,29 +218,7 @@ public class MainCtrl extends HttpServlet {
 			RequestContext  requestContext = new ServletRequestContext(request);
 			if(FileUpload.isMultipartContent(requestContext)){
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
+				filename = getString(request, filename);
 			}
 			
 			go("/js/uploaddoc.jsp?docname="+filename, request, response);
@@ -278,29 +236,7 @@ public class MainCtrl extends HttpServlet {
 			RequestContext  requestContext = new ServletRequestContext(request);
 			if(FileUpload.isMultipartContent(requestContext)){
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
+				filename = getString(request, filename);
 			}
 			
 			go("/js/uploaddoc2.jsp?docname="+filename, request, response);
@@ -314,33 +250,11 @@ public class MainCtrl extends HttpServlet {
 		{
 			try {
 				String filename="";
-			request.setCharacterEncoding("gb2312");
+			request.setCharacterEncoding("gbk");
 			RequestContext  requestContext = new ServletRequestContext(request);
 			if(FileUpload.isMultipartContent(requestContext)){
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
+				filename = getString(request, filename);
 			}
 			
 			go("/js/uploaddoc3.jsp?docname="+filename, request, response);
@@ -361,31 +275,9 @@ public class MainCtrl extends HttpServlet {
 			RequestContext  requestContext = new ServletRequestContext(request);
 			if(FileUpload.isMultipartContent(requestContext)){
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
-			    
-			   if(filename.indexOf(".xls")>-1)
+				filename = getString(request, filename);
+
+				if(filename.contains(".xls"))
 				{
 					Workbook workbook;
 					try {
@@ -398,21 +290,21 @@ public class MainCtrl extends HttpServlet {
 						{
 							Cell cell = null;
 							try{
-								String isql = "insert into "+tablename+"(";
+								StringBuilder isql = new StringBuilder("insert into " + tablename + "(");
 								
 								for(String str:whzdstr.split("-"))
 								{ 
-									isql+=str+",";
+									isql.append(str).append(",");
 								}
-								isql = isql.substring(0,isql.length()-1);
-								isql+=")values(";
+								isql = new StringBuilder(isql.substring(0, isql.length() - 1));
+								isql.append(")values(");
 								
 								int j=0;
 								int empty = 1;
 								for(String str:whzdstr.split("-"))
 								{
 								cell = sheet.getCell(j,i); 
-								isql+="'"+cell.getContents()+"',";
+								isql.append("'").append(cell.getContents()).append("',");
 								String content = cell.getContents()==null?"":cell.getContents();
 								if(!"".equals(content.trim()))
 								{
@@ -421,11 +313,10 @@ public class MainCtrl extends HttpServlet {
 								j++;
 								}
 								if(empty==1)continue;
-								isql = isql.substring(0,isql.length()-1);
-								isql+=")";
-								dao.commOper(isql);
-							}catch (Exception e) {
-							continue;
+								isql = new StringBuilder(isql.substring(0, isql.length() - 1));
+								isql.append(")");
+								dao.commOper(isql.toString());
+							}catch (Exception ignored) {
 							}
 						    
 						 } 
@@ -448,40 +339,13 @@ public class MainCtrl extends HttpServlet {
 				String filename="";
 			request.setCharacterEncoding("gb2312");
 			RequestContext  requestContext = new ServletRequestContext(request);
-			if(FileUpload.isMultipartContent(requestContext)){
+				filename = getString(request, filename, requestContext);
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
-			}
-			
-			go("/js/uploadimg.jsp?filename="+filename, request, response);
+				go("/js/uploadimg.jsp?filename="+filename, request, response);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			    }
 		}
-		
-		
 		if(ac.equals("uploadimg2"))
 		{
 			try {
@@ -490,29 +354,7 @@ public class MainCtrl extends HttpServlet {
 			RequestContext  requestContext = new ServletRequestContext(request);
 			if(FileUpload.isMultipartContent(requestContext)){
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
+				filename = getString(request, filename);
 			}
 			
 			go("/js/uploadimg2.jsp?filename="+filename, request, response);
@@ -520,7 +362,6 @@ public class MainCtrl extends HttpServlet {
 				e1.printStackTrace();
 			    }
 		}
-		
 		if(ac.equals("uploadimg3"))
 		{
 			try {
@@ -529,29 +370,7 @@ public class MainCtrl extends HttpServlet {
 			RequestContext  requestContext = new ServletRequestContext(request);
 			if(FileUpload.isMultipartContent(requestContext)){
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
+				filename = getString(request, filename);
 			}
 			
 			go("/js/uploadimg3.jsp?filename="+filename, request, response);
@@ -567,32 +386,8 @@ public class MainCtrl extends HttpServlet {
 			request.setCharacterEncoding("gb2312");
 			RequestContext  requestContext = new ServletRequestContext(request);
 			if(FileUpload.isMultipartContent(requestContext)){
-
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
+				filename = getFactory(request, filename);
 			}
-			
 			go("/js/uploadimg4.jsp?filename="+filename, request, response);
 			} catch (Exception e1) {
 				e1.printStackTrace();
@@ -603,36 +398,11 @@ public class MainCtrl extends HttpServlet {
 		{
 			try {
 				String filename="";
-			request.setCharacterEncoding("gb2312");
+			request.setCharacterEncoding("gbk");
 			RequestContext  requestContext = new ServletRequestContext(request);
-			if(FileUpload.isMultipartContent(requestContext)){
+				filename = getString(request, filename, requestContext);
 
-			   DiskFileItemFactory factory = new DiskFileItemFactory();
-			   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
-			   ServletFileUpload upload = new ServletFileUpload(factory);
-			   upload.setSizeMax(100*1024*1024);
-			   List items = new ArrayList();
-			    
-			     items = upload.parseRequest(request);
-			     
-			    FileItem fileItem = (FileItem) items.get(0);
-			   if(fileItem.getName()!=null && fileItem.getSize()!=0)
-			    {
-			    if(fileItem.getName()!=null && fileItem.getSize()!=0){
-			      File fullFile = new File(fileItem.getName());
-			      filename = Info.generalFileName(fullFile.getName());
-			      File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
-			      try {
-			       fileItem.write(newFile);
-			      } catch (Exception e) {
-			       e.printStackTrace();
-			      }
-			     }else{
-			     }
-			    }
-			}
-			
-			go("/js/uploadimg5.jsp?filename="+filename, request, response);
+				go("/js/uploadimg5.jsp?filename="+filename, request, response);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			    }
@@ -644,11 +414,76 @@ public class MainCtrl extends HttpServlet {
 		out.close();
 	}
 
+	private String getFactory(HttpServletRequest request, String filename) throws FileUploadException {
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		upload.setSizeMax(100*1024*1024);
+		List items;
+
+		items = upload.parseRequest(request);
+
+		FileItem fileItem = (FileItem) items.get(0);
+		filename = getString2(request, filename, fileItem);
+		return filename;
+	}
+
+	private String getString(HttpServletRequest request, String filename, RequestContext requestContext) throws FileUploadException {
+		if(FileUpload.isMultipartContent(requestContext)){
+
+		   DiskFileItemFactory factory = new DiskFileItemFactory();
+		   factory.setRepository(new File(request.getRealPath("/upfile/")+"/"));
+		   ServletFileUpload upload = new ServletFileUpload(factory);
+		   upload.setSizeMax(100*1024*1024);
+		   List items;
+
+			 items = upload.parseRequest(request);
+
+			FileItem fileItem = (FileItem) items.get(0);
+			filename = getString(request, filename, fileItem);
+		}
+		return filename;
+	}
+
+	private String getString2(HttpServletRequest request, String filename, FileItem fileItem) {
+		if(fileItem.getName()!=null && fileItem.getSize()!=0)
+		 {
+		 if(fileItem.getName()!=null && fileItem.getSize()!=0){
+			 filename = getString(request, fileItem);
+		 }
+		 }
+		return filename;
+	}
+
+	private String getString(HttpServletRequest request, FileItem fileItem) {
+		String filename;
+		File fullFile = new File(fileItem.getName());
+		filename = Info.generalFileName(fullFile.getName());
+		File newFile = new File(request.getRealPath("/upfile/")+"/" + filename);
+		try {
+		 fileItem.write(newFile);
+		} catch (Exception e) {
+		 e.printStackTrace();
+		}
+		return filename;
+	}
+
+	private String getString(HttpServletRequest request, String filename, FileItem fileItem) {
+		if(fileItem.getName()!=null && fileItem.getSize()!=0) {
+			if (fileItem.getName() != null && fileItem.getSize() != 0) {
+				filename = getString(request, fileItem);
+			}
+		}
+		return filename;
+	}
+
+	private String getString(HttpServletRequest request, String filename) throws FileUploadException {
+		filename = getFactory(request, filename);
+		return filename;
+	}
+
 
 	public void init() throws ServletException {
-		// Put your code here
-	}
-	
-	
 
+	}
 }

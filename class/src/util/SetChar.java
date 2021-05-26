@@ -19,7 +19,7 @@ public class SetChar extends HttpServlet implements Filter {
 			FilterChain filterChain) {
 		try {
 			//request.setCharacterEncoding("gb2312");
-			
+
 			HttpServletRequest req = (HttpServletRequest) request;
 
 			if (req.getMethod().equalsIgnoreCase("get")) {
@@ -35,7 +35,7 @@ public class SetChar extends HttpServlet implements Filter {
 			filterConfig.getServletContext().log(iox.getMessage());
 		}
 	}
-	
+
 	  private void encoding(HttpServletRequest request) {
 	        Iterator iter = request.getParameterMap().values().iterator();
 	        while (iter.hasNext()) {
@@ -50,7 +50,7 @@ public class SetChar extends HttpServlet implements Filter {
 	            }
 	        }
 	  }
- 
+
 
 	// Clean up resources
 	public void destroy() {

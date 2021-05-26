@@ -1,7 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ page language="java" import="dao.CommDAO" pageEncoding="gbk"%>
 <%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
-<%@page import="util.PageManager"%>
+<%@page import="java.util.HashMap"%>
 <%
 if(request.getSession().getAttribute("username")==null )
 {
@@ -94,23 +93,21 @@ new CommDAO().insert(request,response,"allusers",ext,true,false,"");
 <script language=javascript src='js/My97DatePicker/WdatePicker.js'></script>
 <script language=javascript src='js/popup.js'></script>
 <script language=javascript src='js/ajax.js'></script>
-<%@page import="java.util.ArrayList"%> 
-<%@page import="java.util.HashMap"%> 
-<script language=javascript >  
- 
- function checkform(){  
-var usernameobj = document.getElementById("username");  
-if(usernameobj.value==""){  
-document.getElementById("clabelusername").innerHTML="&nbsp;&nbsp;<font color=red>ログイン兆を秘れてください</font>";
-return false;  
-}else{
-document.getElementById("clabelusername").innerHTML="  ";  
-}  
-  
-var usernameobj = document.getElementById("username");  
-if(usernameobj.value!=""){  
-var ajax = new AJAX();
-ajax.post("factory/checkno.jsp?table=allusers&col=username&value="+usernameobj.value+"&checktype=insert&ttime=<%=Info.getDateStr()%>") 
+<script language=javascript>
+
+    function checkform() {
+        var usernameobj = document.getElementById("username");
+        if (usernameobj.value == "") {
+            document.getElementById("clabelusername").innerHTML = "&nbsp;&nbsp;<font color=red>ログイン兆を秘れてください</font>";
+            return false;
+        } else {
+            document.getElementById("clabelusername").innerHTML = "  ";
+        }
+
+        var usernameobj = document.getElementById("username");
+        if (usernameobj.value != "") {
+            var ajax = new AJAX();
+            ajax.post("factory/checkno.jsp?table=allusers&col=username&value=" + usernameobj.value + "&checktype=insert&ttime=<%=Info.getDateStr()%>")
 var msg = ajax.getValue();
 if(msg.indexOf('Y')>-1){
 document.getElementById("clabelusername").innerHTML="&nbsp;&nbsp;<font color=red>ログイン兆は屡に贋壓しています</font>";

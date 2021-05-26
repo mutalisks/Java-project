@@ -7,7 +7,7 @@ function toReplace(strs) {
 var http_request = false;
 function send_request(productId, productName) {
 	http_request = false;
-	if (productId == "") {
+	if (productId === "") {
 		return false;
 	} else {
 		     
@@ -45,8 +45,8 @@ function send_request(productId, productName) {
 	}
 }
 function processResponse() {
-	if (http_request.readyState == 4) {
-		if (http_request.status == 200) {
+	if (http_request.readyState === 4) {
+		if (http_request.status === 200) {
 			var responseText = http_request.responseText;
 			display(responseText);
 		} else {

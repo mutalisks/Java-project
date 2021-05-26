@@ -1,7 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
-<%@page import="util.PageManager"%>
+<%@ page language="java" import="util.PageManager" pageEncoding="gbk"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 
 <%
 response.setContentType("application/vnd.ms-excel");

@@ -12,8 +12,7 @@ int b=fc+random.nextInt(bc-fc);
 return new Color(r,g,b); 
 } 
 %> 
-<% 
-//out.clear();//这句针对resin服务器，如果是tomacat可以不要这句
+<%
 response.setHeader("Pragma","No-cache"); 
 response.setHeader("Cache-Control","no-cache"); 
 response.setDateHeader("Expires", 0); 
@@ -39,8 +38,7 @@ String rand=String.valueOf(random.nextInt(10));
 sRand+=rand; 
 g.setColor(new Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110))); 
 g.drawString(rand,13*i+6,16); 
-} 
-// 将认证码存入SESSION 
+}
 session.setAttribute("random",sRand); 
 g.dispose(); 
 ImageIO.write(image, "JPEG", response.getOutputStream()); 

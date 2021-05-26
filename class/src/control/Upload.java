@@ -63,7 +63,7 @@ public class Upload extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		StringBuffer   sb   =   new   StringBuffer(50);   
+		StringBuilder sb   =   new StringBuilder(50);
 		 response.setContentType("application/x-msdownload;charset=GB2312");   
         try {
 			response.setHeader("Content-Disposition",   new   String(sb.toString()   
@@ -116,10 +116,8 @@ public class Upload extends HttpServlet {
 					    bis.close();
 					    fos.close();
 				
-		               new Info().delPic(request.getRealPath("/upfile/")+"/", filename);
-		     } catch (Exception e) {
-				 
-			}finally{
+		               Info.delPic(request.getRealPath("/upfile/")+"/", filename);
+		     } catch (Exception ignored) {
 			}
 	}
 

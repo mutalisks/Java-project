@@ -1,7 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
-<%@page import="util.PageManager"%>
+<%@ page language="java" import="util.PageManager" pageEncoding="gbk"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 
 <%
 response.setContentType("application/vnd.ms-excel");
@@ -28,10 +27,7 @@ response.addHeader("Content-Disposition", "attachment;filename=gonggaoxinxi.xls"
     
 
   </tr>
-  <% 
-  	//difengysfiqfgieuheze
-//youzuiping1
-//txixixngdy
+  <%
     String url = "gonggaoxinxi_list.jsp?1=1"; 
     String sql =  "select * from gonggaoxinxi where 1=1";
     sql+=" order by id desc";
@@ -39,10 +35,6 @@ response.addHeader("Content-Disposition", "attachment;filename=gonggaoxinxi.xls"
 	int i=0;
 	for(HashMap map:list){ 
 	i++;
-	//wxflzhistri
-	//zoxngxetxoxngjxvi
-//txixgihxngjs
-//youzuiping2
      %>
   <tr>
     <td width="30" align="center"><%=i %></td>
@@ -54,7 +46,7 @@ response.addHeader("Content-Disposition", "attachment;filename=gonggaoxinxi.xls"
     <td width="138" align="center"><%=map.get("addtime") %></td>
   </tr>
   	<%
-  }
+      }
    %>
 </table>
 

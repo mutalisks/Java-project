@@ -1,16 +1,14 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
-<%@page import="util.PageManager"%>
+<%@ page language="java" import="dao.CommDAO" pageEncoding="gbk"%>
+<%@page import="java.util.HashMap"%>
 <html>
-  <head>
+<head>
     <title>”Ëºs§Œ¥_’J</title>
     <LINK href="css.css" type=text/css rel=stylesheet>
 
-  </head>
+</head>
 
-  <body >
-  <%
+<body>
+<%
 	String id=request.getParameter("id");
 	HashMap m = new CommDAO().getmap(id,"yuyue");
      %>

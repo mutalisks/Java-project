@@ -14,12 +14,12 @@ function clockon(bgclock){
 	if(hour<10) hour="0"+hour;
 	if(minu<10) minu="0"+minu;
 	if(sec<10) sec="0"+sec;
-	var arr_week=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+	const arr_week = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"];
 	week=arr_week[day];
-	var time="";
+	let time = "";
 	time=year+"年"+month+"月"+date+"日 "+week+" "+hour+":"+minu+":"+sec;
 	if(document.all){
 		bgclock.innerHTML="<b>"+time+"</b>"
 	}
-	var timer=setTimeout("clockon(bgclock)",200);
+	const timer = setTimeout("clockon(bgclock)", 200);
 } 

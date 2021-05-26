@@ -2,10 +2,7 @@
 
 package util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
 import dao.CommDAO;
@@ -13,9 +10,6 @@ import dao.CommDAO;
 
 
 public class PageManager {
-	private PageManager() {
-
-	}
 
 
 	// 默认一页最大记录数
@@ -37,7 +31,7 @@ public class PageManager {
 	protected long count;
 
 	// 数据
-	protected Collection collection;
+	protected List<HashMap<String, String>> collection;
 
 	// 数据查询对象
 	protected CommDAO dao = new CommDAO();
@@ -174,7 +168,6 @@ public class PageManager {
 					.append(parameter)
 					.append("' class='ls'>").append("First page")
 					.append("</a>");
-		// ////////////////////////#1157B7
 		buf.append("&nbsp;&nbsp;&nbsp;&nbsp;");
 
 		if (this.currentPage > 1) {
@@ -187,21 +180,6 @@ public class PageManager {
 
 		}
 		buf.append("&nbsp;&nbsp;");
-
-		int currentSegment = this.currentPage % segment == 0 ? this.currentPage
-				/ segment : this.currentPage / segment + 1;
-
-		/*for (int i = 1; i <= this.pageNumber; i++) {
-			if (this.currentPage == i)
-				buf.append("<font color='red'>").append(i).append("</font>");
-
-			else
-				buf.append("<a href='").append(this.path).append(
-						"&currentPage=").append(i).append(parameter).append(
-						"' class='ls'>[").append(i).append(
-						"]</a>");
-		}*/
-
 		buf.append("&nbsp;&nbsp;");
 		if (this.currentPage < this.pageNumber) {
 			buf.append("<a href='").append(this.path).append("&currentPage=")
@@ -220,25 +198,12 @@ public class PageManager {
 		else
 			buf.append("<a href='").append(this.path).append("&currentPage=")
 					.append(this.pageNumber).append(parameter).append(
-							"' class='ls'>").append("Last page")
+					"' class='ls'>").append("Last page")
 					.append("</a></font>&nbsp;&nbsp;");
-		// ////////////////////
-		// for (int i = 0; i < this.pageNumber; i++) {
-		// if (this.currentPage == i + 1) {
-		// buf.append("<font color=red>[" + (i + 1) + "]</font>").append(
-		// "&nbsp;");
-		// } else {
-		// buf.append("<a href='").append(this.path).append(
-		// "&currentPage=").append(i + 1).append(parameter)
-		// .append("' style='TEXT-DECORATION:none'>").append(
-		// "[" + (i + 1) + "]").append("</a>&nbsp;");
-		// }
-
-		// }
-		buf.append("<select onchange=\"javascript:window.location='").append(
-				this.path).append("&currentPage='+").append(
-				"this.options[this.selectedIndex].value").append(parameter)
-				.append("\">");
+			buf.append("<select onchange=\"javascript:window.location='").append(
+					this.path).append("&currentPage='+").append(
+					"this.options[this.selectedIndex].value").append(parameter)
+					.append("\">");
 		for (int i = 0; i < this.pageNumber; i++) {
 			if (this.currentPage == i + 1)
 				buf.append("<option value=").append(i + 1).append(" selected=\"selected\">").append(i + 1).append("</option>");
@@ -259,18 +224,6 @@ public class PageManager {
 		return count;
 	}
 
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public long getPageNumber() {
-		return pageNumber;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
 	public String getInfo() {
 		return info;
 	}
@@ -281,7 +234,7 @@ public class PageManager {
 		PageManager pageManager = PageManager.getPage(url, pagesize, request);
 		  pageManager.doList(sql);
 		  PageManager bean = (PageManager) request.getAttribute("page");
-		 
+
 		  ArrayList nlist = (ArrayList) bean.getCollection();
 		  return nlist;
 	}

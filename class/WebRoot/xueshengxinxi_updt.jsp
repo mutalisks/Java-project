@@ -1,33 +1,27 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@page import="util.Info"%>
-<%@page import="dao.CommDAO"%>
-<%@page import="util.PageManager"%>
+<%@ page language="java" import="dao.CommDAO" pageEncoding="gbk"%>
+<%@page import="java.util.HashMap"%>
 <html>
-  <head>
-    <title>学生情報</title>
-	
-	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js" charset="gb2312"></script>
-	<script type="text/javascript" src="js/popup.js"></script>
-    <LINK href="css.css" type=text/css rel=stylesheet>
+<head>
+  <title>学生情報</title>
 
-  </head>
+  <script type="text/javascript" src="js/My97DatePicker/WdatePicker.js" charset="gb2312"></script>
+  <script type="text/javascript" src="js/popup.js"></script>
+  <LINK href="css.css" type=text/css rel=stylesheet>
+
+</head>
 <script language="javascript">
 
-function hsgxia2shxurxu(nstr,nwbk)
-{
-	if (eval("form1."+nwbk).value.indexOf(nstr)>=0)
-	{
-		eval("form1."+nwbk).value=eval("form1."+nwbk).value.replace(nstr+"；", "");
-	}
-	else
-	{
-		eval("form1."+nwbk).value=eval("form1."+nwbk).value+nstr+"；";
-	}
-}
+  function hsgxia2shxurxu(nstr, nwbk) {
+    if (eval("form1." + nwbk).value.indexOf(nstr) >= 0) {
+      eval("form1." + nwbk).value = eval("form1." + nwbk).value.replace(nstr + "；", "");
+    } else {
+      eval("form1." + nwbk).value = eval("form1." + nwbk).value + nstr + "；";
+    }
+  }
 </script>
 
-  <body >
-   <% 
+<body>
+<%
 
 String id = request.getParameter("id"); 
 

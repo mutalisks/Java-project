@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout::head(title='ログイン',stylesheets=~{::#stylesheets})">
+<meta charset="UTF-8">
+<title>ログイン</title>
+</head>
+<body>
+  <th:block id="stylesheets">
+    <link rel="stylesheet" th:href="@{/dist/jquery-ui-1.12.1/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+    <link rel="stylesheet" th:href="@{/css/account/login.css}">
+  </th:block>
+  <th:block id="contents">
+    <div class="main-content col-sm-4 col-md-6 col-lg-6 col-xl-4 container position-absolute bg-white rounded border border-black px-4 py-3">
+      <div class="form-group row">
+        <div class="col">
+          <h4 class="font-weight-bold">ログイン</h4>
+          <h6 class="text-muted">アカウント情報を入力してください</h6>
+        </div>
+      </div>
+      <form th:action="@{/login}" method="post" class="allow-enter-submit" th:object="${loginForm}" th:with="labelSize='col-sm-3',formSize='col-sm-9'">
+        <div th:replace="layouts/message::message"></div>
+        <div class="form-group accessCode row">
+          <div class="input-group">
+            <div class="input-group-prepend col-sm-12">
+              <span class="input-group-text"><i class="cui-user fa-lg"></i></span>
+              <input type="text" class="w-100 border-left-0 pl-3 rounded-right" placeholder="ID" th:field="*{id}" th:errorclass="error-field">
+              <span class="error-tooltip" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">error</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group password row">
+          <div class="input-group">
+            <div class="input-group-prepend col-sm-12">
+              <span class="input-group-text"><i class="cui-lock-locked fa-lg"></i></span>
+              <input type="password" class="w-100 border-left-0 pl-3 rounded-right" placeholder="パスワード"  th:field="*{password}" th:errorclass="error-field"> 
+              <span class="error-tooltip" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" name="create" class="btn btn-primary login-btn mb-2">ログイン</button>
+        </div>
+      </form>
+    </div>
+  </th:block>
+  <script type="text/javascript" th:src="@{/dist/jquery/js/jquery-3.3.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{/dist/bootstrap/js/bootstrap.min.js}"></script>
+  <script type="text/javascript" th:src="@{/js/error-popup.js}"></script>
+  <script type="text/javascript" th:src="@{/js/application.js}"></script> 
+</body>
+</html>

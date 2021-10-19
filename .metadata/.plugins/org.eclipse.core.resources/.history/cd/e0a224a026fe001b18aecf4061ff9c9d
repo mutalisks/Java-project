@@ -1,0 +1,209 @@
+
+/* Drop Tables */
+
+DROP TABLE IF EXISTS nippo_record;
+DROP TABLE IF EXISTS account;
+DROP TABLE IF EXISTS account_type;
+DROP TABLE IF EXISTS nippo_category;
+DROP TABLE IF EXISTS sample;
+
+
+
+
+/* Create Tables */
+
+-- アカウント
+CREATE TABLE account
+(
+  -- ID
+  id bigserial NOT NULL,
+  -- アカウント種別ID
+  account_type_id bigint NOT NULL,
+  -- パスワード
+  password varchar NOT NULL,
+  -- 姓
+  last_name varchar NOT NULL,
+  -- 名
+  first_name varchar NOT NULL,
+  -- バージョンNo
+  version_no bigint DEFAULT 1 NOT NULL,
+  -- 作成日時
+  created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 更新日時
+  updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 削除状態
+  deleted boolean DEFAULT 'false' NOT NULL,
+  PRIMARY KEY (id)
+) WITHOUT OIDS;
+
+
+-- アカウント種別
+CREATE TABLE account_type
+(
+  -- ID
+  id bigserial NOT NULL,
+  -- 名前
+  name varchar NOT NULL,
+  -- バージョンNo
+  version_no bigint DEFAULT 1 NOT NULL,
+  -- 作成日時
+  created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 更新日時
+  updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 削除状態
+  deleted boolean DEFAULT 'false' NOT NULL,
+  PRIMARY KEY (id)
+) WITHOUT OIDS;
+
+
+-- 日報カテゴリー
+CREATE TABLE nippo_category
+(
+  -- ID
+  id bigserial NOT NULL,
+  -- 名前
+  name varchar NOT NULL,
+  -- 並び順
+  sort_order int NOT NULL,
+  -- バージョンNo
+  version_no bigint DEFAULT 1 NOT NULL,
+  -- 作成日時
+  created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 更新日時
+  updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 削除状態
+  deleted boolean DEFAULT 'false' NOT NULL,
+  PRIMARY KEY (id)
+) WITHOUT OIDS;
+
+
+-- 日報記録
+CREATE TABLE nippo_record
+(
+  -- ID
+  id bigserial NOT NULL,
+  -- アカウントID
+  account_id bigint NOT NULL,
+  -- 日報カテゴリーID
+  nippo_category_id bigint NOT NULL,
+  -- 対象日
+  target_date date NOT NULL,
+  -- 内容
+  content text NOT NULL,
+  -- バージョンNo
+  version_no bigint DEFAULT 1 NOT NULL,
+  -- 作成日時
+  created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 更新日時
+  updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 削除状態
+  deleted boolean DEFAULT 'false' NOT NULL,
+  PRIMARY KEY (id)
+) WITHOUT OIDS;
+
+
+-- サンプル
+CREATE TABLE sample
+(
+  -- ID
+  id bigserial NOT NULL,
+  -- 姓
+  last_name varchar NOT NULL,
+  -- 名
+  first_name varchar,
+  -- 性別
+  gender int,
+  -- 旅行先
+  destination varchar,
+  -- 満足度
+  satisfaction int,
+  -- 備考
+  note varchar,
+  -- バージョンNo
+  version_no bigint DEFAULT 1 NOT NULL,
+  -- 作成日時
+  created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 更新日時
+  updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  -- 削除状態
+  deleted boolean DEFAULT 'false' NOT NULL,
+  PRIMARY KEY (id)
+) WITHOUT OIDS;
+
+
+
+/* Create Foreign Keys */
+
+ALTER TABLE nippo_record
+  ADD FOREIGN KEY (account_id)
+  REFERENCES account (id)
+  ON UPDATE RESTRICT
+  ON DELETE RESTRICT
+;
+
+
+ALTER TABLE account
+  ADD FOREIGN KEY (account_type_id)
+  REFERENCES account_type (id)
+  ON UPDATE RESTRICT
+  ON DELETE RESTRICT
+;
+
+
+ALTER TABLE nippo_record
+  ADD FOREIGN KEY (nippo_category_id)
+  REFERENCES nippo_category (id)
+  ON UPDATE RESTRICT
+  ON DELETE RESTRICT
+;
+
+
+
+/* Comments */
+
+COMMENT ON TABLE account IS 'アカウント';
+COMMENT ON COLUMN account.id IS 'ID';
+COMMENT ON COLUMN account.account_type_id IS 'アカウント種別ID';
+COMMENT ON COLUMN account.password IS 'パスワード';
+COMMENT ON COLUMN account.last_name IS '姓';
+COMMENT ON COLUMN account.first_name IS '名';
+COMMENT ON COLUMN account.version_no IS 'バージョンNo';
+COMMENT ON COLUMN account.created_at IS '作成日時';
+COMMENT ON COLUMN account.updated_at IS '更新日時';
+COMMENT ON COLUMN account.deleted IS '削除状態';
+COMMENT ON TABLE account_type IS 'アカウント種別';
+COMMENT ON COLUMN account_type.id IS 'ID';
+COMMENT ON COLUMN account_type.name IS '名前';
+COMMENT ON COLUMN account_type.version_no IS 'バージョンNo';
+COMMENT ON COLUMN account_type.created_at IS '作成日時';
+COMMENT ON COLUMN account_type.updated_at IS '更新日時';
+COMMENT ON COLUMN account_type.deleted IS '削除状態';
+COMMENT ON TABLE nippo_category IS '日報カテゴリー';
+COMMENT ON COLUMN nippo_category.id IS 'ID';
+COMMENT ON COLUMN nippo_category.name IS '名前';
+COMMENT ON COLUMN nippo_category.sort_order IS '並び順';
+COMMENT ON COLUMN nippo_category.version_no IS 'バージョンNo';
+COMMENT ON COLUMN nippo_category.created_at IS '作成日時';
+COMMENT ON COLUMN nippo_category.updated_at IS '更新日時';
+COMMENT ON COLUMN nippo_category.deleted IS '削除状態';
+COMMENT ON TABLE nippo_record IS '日報記録';
+COMMENT ON COLUMN nippo_record.id IS 'ID';
+COMMENT ON COLUMN nippo_record.account_id IS 'アカウントID';
+COMMENT ON COLUMN nippo_record.nippo_category_id IS '日報カテゴリーID';
+COMMENT ON COLUMN nippo_record.target_date IS '対象日';
+COMMENT ON COLUMN nippo_record.content IS '内容';
+COMMENT ON COLUMN nippo_record.version_no IS 'バージョンNo';
+COMMENT ON COLUMN nippo_record.created_at IS '作成日時';
+COMMENT ON COLUMN nippo_record.updated_at IS '更新日時';
+COMMENT ON COLUMN nippo_record.deleted IS '削除状態';
+COMMENT ON COLUMN sample.id IS 'ID';
+COMMENT ON COLUMN sample.last_name IS '姓';
+COMMENT ON COLUMN sample.first_name IS '名';
+COMMENT ON COLUMN sample.gender IS '性別';
+COMMENT ON COLUMN sample.destination IS '旅行先';
+COMMENT ON COLUMN sample.satisfaction IS '満足度';
+COMMENT ON COLUMN sample.note IS '備考';
+COMMENT ON COLUMN sample.version_no IS 'バージョンNo';
+COMMENT ON COLUMN sample.created_at IS '作成日時';
+COMMENT ON COLUMN sample.updated_at IS '更新日時';
+COMMENT ON COLUMN sample.deleted IS '削除状態';

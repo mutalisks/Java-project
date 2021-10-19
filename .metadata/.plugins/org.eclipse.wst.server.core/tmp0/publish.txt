@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Fri Aug 13 02:42:11 JST 2021
+org.eclipse.jst.jee.server\:/binary\:D\:\\projects\\web-customer-tracker-E\\WebContent\\WEB-INF\\lib\\spring-web-5.3.9.jar=WEB-INF/lib/spring-web-5.3.9.jar
+org.eclipse.jst.jee.server\:/binary\:D\:\\projects\\web-customer-tracker-E\\WebContent\\WEB-INF\\lib\\spring-web-5.3.9-sources.jar=WEB-INF/lib/spring-web-5.3.9-sources.jar

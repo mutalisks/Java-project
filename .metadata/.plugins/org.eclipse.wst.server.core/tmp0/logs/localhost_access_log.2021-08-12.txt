@@ -1,0 +1,17 @@
+127.0.0.1 - - [12/Aug/2021:03:02:47 +0900] "GET / HTTP/1.1" 404 901
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:03:02:48 +0900] "GET /web-customer-tracker-E/ HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:03:03:23 +0900] "GET /web-customer-tracker-E/customer/list HTTP/1.1" 200 976
+127.0.0.1 - - [12/Aug/2021:03:27:09 +0900] "GET / HTTP/1.1" 404 901
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:03:27:10 +0900] "GET /web-customer-tracker-E/ HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:03:27:13 +0900] "GET /web-customer-tracker-E/ HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:03:27:24 +0900] "GET /web-customer-tracker-E/customer/list HTTP/1.1" 200 1151
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:03:27:24 +0900] "GET /web-customer-tracker-E/resources/css/style.css HTTP/1.1" 200 1049
+127.0.0.1 - - [12/Aug/2021:15:59:10 +0900] "GET / HTTP/1.1" 404 901
+127.0.0.1 - - [12/Aug/2021:20:47:07 +0900] "GET / HTTP/1.1" 404 901
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:20:47:08 +0900] "GET /web-customer-tracker-E/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:20:47:09 +0900] "GET /web-customer-tracker-E/customer/list HTTP/1.1" 200 1338
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:20:47:09 +0900] "GET /web-customer-tracker-E/resources/css/style.css HTTP/1.1" 200 1049
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:20:47:11 +0900] "GET /web-customer-tracker-E/customer/showFormForAdd HTTP/1.1" 200 1313
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:20:47:11 +0900] "GET /web-customer-tracker-E/resources/css/add-customer-style.css HTTP/1.1" 200 566
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:20:47:28 +0900] "POST /web-customer-tracker-E/customer/saveCustomer HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [12/Aug/2021:20:47:28 +0900] "GET /web-customer-tracker-E/customer/list HTTP/1.1" 200 1441

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+  <th:block th:fragment="message" 
+    th:with="
+      hasFieldError=${#arrays.length(#fields.detailedErrors())} != 0,
+      hasStoreError=${(#request.getAttribute('scopedTarget.messageStore') != null 
+        && #request.getAttribute('scopedTarget.messageStore').hasErrors())},
+      hasError = ${hasStoreError || !#lists.isEmpty(errorMessages)}">
+    <div th:if="${!#lists.isEmpty(infoMessages)}" class="alert alert-success" role="alert">
+      <ul class="mb-0" th:classappend="${#lists.size(infoMessages) == 1 ? 'list-unstyled' : ''}">
+        <li th:each="message : ${infoMessages}">
+          <span th:text="${message}">Info Message</span>
+        </li>
+      </ul>
+    </div>
+    <div class="alert alert-danger" role="alert" th:if="${hasFieldError || hasError}">
+      <ul th:if="${hasFieldError}" class="mb-0 list-unstyled">
+        <li>
+          <span>入力エラーがあります。</span>
+        </li>
+      </ul>
+      <ul th:if="${hasError}" class="mb-0">
+        <th:block th:if="${hasStoreError}">
+          <li th:each="msg : ${#request.getAttribute('scopedTarget.messageStore').errorMessages}">
+            <span th:text="${msg.message}">Error Message</span>
+          </li>
+        </th:block>
+        <th:block th:if="${!#lists.isEmpty(errorMessages)}">
+          <li th:each="message : ${errorMessages}">
+            <span th:text="${message}">Error Message</span>
+          </li>
+        </th:block>
+      </ul>
+    </div>
+  </th:block>
+</body>
+</html>

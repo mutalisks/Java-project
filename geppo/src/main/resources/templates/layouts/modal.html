@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>モーダル</title>
+</head>
+<body>
+
+  <!--/* 確認モーダル */-->
+  <th:block th:fragment="confirm">
+    <div class="modal fade" th:id="${modalId}" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--/* タイトル */-->
+            <th:block th:if="${title}">
+              <h5 th:replace="${title}"></h5>
+            </th:block>
+            <th:block th:unless="${title}">
+              <h5 class="modal-title" th:text="${titleText}">確認</h5>
+            </th:block>
+            <button th:if="${cancelable != false}" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!--/* 内容 */-->
+          <th:block th:if="${body}">
+            <div th:replace="${body}"></div>
+          </th:block>
+          <th:block th:unless="${body}">
+            <div class="modal-body text-left" th:text="${bodyText}" >確認</div>
+          </th:block>
+          <!--/* ボタン類 */-->
+          <div class="modal-footer">
+            <th:block th:if="${cancelable != false}">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+            </th:block>
+            <th:block th:if="${confirmButton}">
+              <button th:replace="${confirmButton}"></button>
+            </th:block>
+            <th:block th:unless="${confirmButton}">
+              <button type="submit" class="btn" th:classappend="${confirmButtonClass}?: 'btn-primary'" th:text="${confirmButtonText}" >確認</button>
+            </th:block>
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+
+  <!--/* 子画面ベース */-->
+  <th:block th:fragment="iframe-base">
+    <div style="display: none">
+      <div th:id="${modalId}" class="modal fade" th:classappend="${modalAction}?: ''" tabindex="-1" role="dialog" th:data-max-height="${maxHeight}" th:data-min-height="${minHeight}">
+        <div class="modal-dialog" th:classappend="${modalClass}?: 'modal-lg'" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" th:text="${titleText}">タイトル</h5>
+              <button type="button" class="close" data-dismiss="modal" >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body modal-iframe"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+</body>
+</html>

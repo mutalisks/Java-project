@@ -1,0 +1,27 @@
+.main-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-content .logo {
+  max-width: 100px;
+}
+
+.main-content .form-group {
+  font-size: 0;
+} 
+
+.main-content .error-tooltip {
+  font-size: 14px !important;
+}
+
+.main-content input {
+  height: 44px;
+  font-size: 14px;
+  border: 1px solid #e0e3e7;
+}  
+
+.main-content .login-btn {
+  padding: 8px 40px;
+}

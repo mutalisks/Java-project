@@ -1,0 +1,23 @@
+package jp.co.plise.geppo.service;
+
+import org.springframework.stereotype.Service;
+
+import jp.co.plise.geppo.model.form.GeppoSearchForm;
+
+/**
+ * 月報サービス
+ */
+@Service
+public class GeppoService {
+
+	public Object searchNippo(GeppoSearchForm searchForm, int pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object add() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

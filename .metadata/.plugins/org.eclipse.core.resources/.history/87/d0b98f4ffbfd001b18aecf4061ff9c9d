@@ -1,0 +1,14 @@
+package jp.co.plise.geppo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import jp.co.plise.geppo.entity.GeppoRecord;
+
+/**
+ * 日報記録リポジトリ
+ */
+@Repository
+public interface GeppoRecordRepository extends JpaRepository<GeppoRecord, Long>, GeppoRecordRepositoryCustom {
+
+}

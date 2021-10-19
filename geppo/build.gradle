@@ -1,0 +1,63 @@
+plugins {
+  id 'org.springframework.boot' version '2.2.4.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'java'
+}
+
+ext {
+  junitVersion = "4.12"
+  powermockVersion = "2.0.0"
+}
+
+group = 'jp.co'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+  implementation 'org.springframework.boot:spring-boot-devtools'
+  compileOnly 'org.projectlombok:lombok'
+  runtimeOnly 'org.postgresql:postgresql'
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude(group: "org.junit.jupiter")
+    exclude(group: "org.junit.vintage")
+    exclude(group: "org.mockito")
+  }
+  testImplementation 'org.springframework.security:spring-security-test'
+  implementation "org.powermock:powermock-module-junit4:${powermockVersion}"
+  implementation "org.powermock:powermock-api-mockito2:${powermockVersion}"
+  testImplementation "junit:junit:${junitVersion}"
+}
+
+test {
+  useJUnitPlatform()
+}
+
+eclipseJdt {
+  doFirst {
+      writeEclipseSettings file(".settings/org.eclipse.core.resources.prefs"),
+              """eclipse.preferences.version=1
+encoding//src/main/resources/application.properties=UTF-8
+encoding/<project>=UTF-8"""
+  }
+}
+
+def writeEclipseSettings(File f, String s) {
+    f.getParentFile().mkdirs()
+    def w = new FileWriter(f)
+    w.write(s)
+    w.close()
+}

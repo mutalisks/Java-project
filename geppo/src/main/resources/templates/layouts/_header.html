@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+  <body>
+    <header class="app-header navbar" th:fragment="header">
+      <div class="col-sm-2">
+        <h1>Geppo</h1>
+      </div>
+      <div class="mr-4">
+        <form th:action="@{/logout}" method="POST">
+          <button class="btn btn-primary">ログアウト</button>
+        </form>
+      </div>
+    </header>
+  </body>
+
+</html>

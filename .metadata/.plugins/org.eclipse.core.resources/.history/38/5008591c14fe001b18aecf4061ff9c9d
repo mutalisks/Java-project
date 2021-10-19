@@ -1,0 +1,91 @@
+package jp.co.plise.geppo.model.form;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public class GeppoSearchForm {
+	private Long id;
+	
+	private Long writtenBy;
+	
+	private String keywords;
+	
+	private LocalDate MonthFrom;
+	
+	private LocalDate MonthTo;
+	
+	private List<GeppoForm> nippoRecords;
+	
+	private Long totalResultCount;
+	
+	private Integer countFrom;
+	
+	public boolean isEmpty() {
+        return id == null && writtenBy == null && keywords == null && MonthFrom == null && MonthTo == null;
+    }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getWrittenBy() {
+		return writtenBy;
+	}
+
+	public void setWrittenBy(Long writtenBy) {
+		this.writtenBy = writtenBy;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+
+	public LocalDate getMonthFrom() {
+		return MonthFrom;
+	}
+
+	public void setMonthFrom(LocalDate monthFrom) {
+		MonthFrom = monthFrom;
+	}
+
+	public LocalDate getMonthTo() {
+		return MonthTo;
+	}
+
+	public void setMonthTo(LocalDate monthTo) {
+		MonthTo = monthTo;
+	}
+
+	public List<GeppoForm> getNippoRecords() {
+		return nippoRecords;
+	}
+
+	public void setNippoRecords(List<GeppoForm> nippoRecords) {
+		this.nippoRecords = nippoRecords;
+	}
+
+	public Long getTotalResultCount() {
+		return totalResultCount;
+	}
+
+	public void setTotalResultCount(Long totalResultCount) {
+		this.totalResultCount = totalResultCount;
+	}
+
+	public Integer getCountFrom() {
+		return countFrom;
+	}
+
+	public void setCountFrom(Integer countFrom) {
+		this.countFrom = countFrom;
+	}
+	
+}

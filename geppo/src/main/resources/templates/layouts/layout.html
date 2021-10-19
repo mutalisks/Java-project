@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:fragment="head">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" th:href="@{/dist/jquery-ui-1.12.1/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/dist/jquery-ui-1.12.1/jquery-ui.structure.min.css}">
+    <link rel="stylesheet" th:href="@{/dist/jquery-ui-1.12.1/jquery-ui.theme.min.css}">
+    <link rel="stylesheet" th:href="@{/dist/coreui/css/coreui.min.css}">
+    <link rel="stylesheet" th:href="@{/dist/coreui/css/coreui-icons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+    <th:block th:if="${stylesheets}">
+      <th:block th:replace="${stylesheets}"></th:block>
+    </th:block>
+    <title th:text="${title}"></title>
+  </head>
+
+  <body th:fragment="body" class="app">
+    <header th:replace="layouts/_header::header"></header>
+    <div class="app-body">
+      <main class="main">
+        <nav aria-label="breadcrumb" th:if="${breadcrumb}">
+          <div class="breadcrumb" th:insert="${breadcrumb}"></div>
+        </nav>
+        <div id="main" th:insert="${contents}"></div>
+      </main>
+    </div>
+    <footer th:replace="layouts/_footer::footer"></footer>
+
+    <script type="text/javascript" th:src="@{/dist/jquery/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/dist/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/dist/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/dist/coreui/js/coreui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/application.js}"></script>
+    <script type="text/javascript" th:src="@{/js/modal.js}"></script>
+    <th:block th:if="${plugins}">
+      <th:block th:replace="${plugins}"></th:block>
+    </th:block>
+    <script th:inline="javascript">
+      const ROOT_URL = /*[[@{/}]]*/ '/';
+    </script>
+    <th:block th:if="${scripts}">
+      <th:block th:replace="${scripts}"></th:block>
+    </th:block>
+  </body>
+
+</html>

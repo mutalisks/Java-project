@@ -1,0 +1,31 @@
+package jp.co.plise.geppo.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import jp.co.plise.geppo.entity.GeppoRecord;
+import jp.co.plise.geppo.model.form.GeppoSearchForm;
+
+/**
+ * 日報記録リポジトリ
+ */
+@Repository
+public interface GeppoRecordRepository extends JpaRepository<GeppoRecord, Long>, GeppoRecordRepositoryCustom {
+    /**
+     * IDとアカウントIDから日報記録を取得します。
+     * @param id 日報記録ID
+     * @param accountId アカウントID
+     * @return 日報記録
+     */
+    @Query("select nr from GeppoRecord nr"
+        + " where nr.id = :id"
+        + " and nr.account.id = :accountId"
+        + " and nr.deleted = false")
+    Optional<GeppoRecord> findByIdAndAccountId(@Param("id") Long id, @Param("accountId") Long accountId);
+
+}

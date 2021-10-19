@@ -1,0 +1,14 @@
+package jp.co.plise.geppo.repository;
+
+import java.util.List;
+
+import jp.co.plise.geppo.entity.GeppoRecord;
+import jp.co.plise.geppo.model.form.GeppoSearchForm;
+
+/**
+ * 月報記録リポジトリカスタム
+ */
+public interface GeppoRecordRepositoryCustom {
+	
+	List<GeppoRecord> searchForPage(GeppoSearchForm form, int pageNo, int limit);
+}

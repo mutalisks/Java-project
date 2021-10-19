@@ -1,0 +1,302 @@
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  color: #000;
+  height: 100%;
+  width: 100%;
+  background: #f8f8f8;
+  background-size: cover;
+  background-attachment: fixed
+}
+
+body.modal-iframe-body {
+  background-color: #ffffff
+}
+
+header .class-list {
+  max-height: 230px;
+  overflow: scroll
+}
+
+@media (max-width: 991.98px) {
+  .app-header .navbar-brand {
+    position: static;
+    margin-left: 0
+  }
+
+  .d-md-down-none {
+    display: flex !important
+  }
+}
+
+.app-header .logo img {
+  max-width: 100px;
+  height: auto
+}
+
+.app-header .dropdown-item i {
+  color: #aaa
+}
+
+.iframe-container {
+  width: 100%;
+  margin: 0px;
+  padding: 20px;
+  max-width: 100%;
+}
+
+table.table-clickable tr[data-href],
+table.table-clickable tr[data-iframe-src] {
+  cursor: pointer;
+}
+
+.table-fixed {
+  table-layout: fixed;
+}
+
+.block-page-transition,
+.block-page-transition-group,
+.block-modal,
+.block-modal-group {
+  cursor: default;
+}
+
+.error-tooltip {
+  display: none;
+  padding: 6px 10px 12px 12px;
+  background: url(./images/bg_error_tooltip_top.gif) left bottom no-repeat;
+  color: #ffffff;
+  text-align: left;
+  width: 200px !important;
+  z-index: 1100;
+}
+
+.tooltip-left {
+  background: url(./images/bg_error_tooltip_left.gif) left bottom no-repeat !important;
+}
+
+.error-field {
+  border: 1px solid #dcc;
+  background-color: #fee;
+}
+
+.modal-iframe {
+  padding: 0px;
+}
+
+.modal-iframe iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.deleted-row {
+  background-color: darkgray;
+}
+
+.general-item-field {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.datepicker {
+  padding: 0px !important;
+}
+
+.datepicker.datepicker-dropdown {
+  z-index: 1200 !important;
+}
+
+.input-group-addon {
+  cursor: pointer;
+}
+
+.floatThead-container {
+  z-index: 1001 !important;
+}
+
+table.table-scrollable .dropdown-menu {
+  z-index: 1002 !important;
+}
+
+.btn.btn-submit {
+  padding: 5px 50px;
+}
+
+.btn.btn-icon {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.btn.btn-icon i+span,
+.btn.btn-icon span+i {
+  margin: 0px 8px;
+}
+
+.date-start::before {
+  content: '〜';
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  transform: translateY(-50%);
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+.word-break-all {
+  word-break: break-all;
+}
+
+.required::after {
+  margin-left: 3px;
+  content: "必須";
+  color: #f86c6b;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+.tooltip-vertical {
+  margin-top: 12px;
+}
+
+.sidebar {
+  border-right: 1px solid #c8ced3;
+}
+
+.sidebar .link-txt {
+  font-size: 16px;
+  padding: .75rem 1rem .75rem 10px;
+}
+
+.sidebar .link-txt:hover {
+  background: #f5f5f5;
+}
+
+.sidebar .link-txt.active {
+  background: #f5f5f5;
+}
+
+.sidebar .link-txt i {
+  font-size: 18px;
+  padding-right: 10px;
+  width: 40px;
+}
+
+.sidebar .sidebar-inner-arrow {
+  padding: 5px;
+}
+
+.sidebar .sidebar-inner-arrow button {
+  padding: 10px 12px;
+}
+
+.sidebar .sidebar-inner-arrow button i {
+  color: #73818f;
+}
+
+.sidebar .sidebar-inner-arrow button:focus {
+  outline: none;
+}
+
+html:not([dir=rtl]) .sidebar {
+  margin-left: 0;
+}
+
+.sidebar-fixed .sidebar {
+  width: 50px;
+  overflow: hidden;
+}
+
+.sidebar-show .sidebar {
+  width: 200px;
+}
+
+.sidebar-show .sidebar .sidebar-inner-arrow {
+  transform: rotate(180deg);
+}
+
+#main {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.breadcrumb {
+  font-size: 16px
+}
+
+div.card {
+  padding: 10px;
+}
+
+.favorite-group .list-group-item {
+  padding: 0.15rem 0.5rem;
+  border: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.favorite-group .list-group-header {
+  padding: 0.5rem;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 0;
+}
+
+.w-100per {
+  width: 100%;
+}
+
+.w-15per {
+  width: 15%;
+}
+
+.w-20per {
+  width: 20%;
+}
+
+.w-25per {
+  width: 25%;
+}
+
+.w-40per {
+  width: 40%;
+}
+
+.facility-name {
+  font-size: 16px;
+}
+
+header {
+  position: sticky !important;
+  top: 0em !important;
+}
+
+footer {
+  justify-content: flex-end !important;
+}
+
+footer div.copyright {
+  padding-right: 15px;
+  text-align: right;
+}
+
+header {
+  position: sticky;
+  z-index: 2000;
+}
+
+.modal-dialog {
+  margin-top: 80px;
+}

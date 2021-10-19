@@ -1,0 +1,100 @@
+package jp.co.plise.geppo.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import jp.co.plise.geppo.model.form.GeppoSearchForm;
+import jp.co.plise.geppo.repository.AccountRepository;
+import jp.co.plise.geppo.repository.GeppoCategoryRepository;
+import jp.co.plise.geppo.service.GeppoService;
+
+/**
+ * 月報コントローラ
+ */
+@Controller
+@RequestMapping("geppo")
+public class GeppoController {
+	
+    @Autowired
+    private GeppoService geppoService;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private GeppoCategoryRepository geppoCategoryRepository;
+    /**
+     * 月報検索・一覧画面を表示します。
+     * @return 画面
+     */
+    @GetMapping("list")
+    public String list(@RequestParam(name = "page", defaultValue = "1") int pageNo, @Validated GeppoSearchForm searchForm,
+            HttpServletRequest request,Model model) {
+    	
+    	return "geppo/list";
+    }
+
+    /**
+     * 月報登録画面を表示します。
+     * @return 画面
+     */
+    @GetMapping("add")
+    public String add() {
+    	
+    	return "geppo/list";
+    }
+
+    /**
+     * 月報を登録します。
+     * @return 画面
+     */
+    @PostMapping("create")
+    public String create() {
+    	return "geppo/list";
+    }
+
+    /**
+     * 月報詳細画面を表示します。
+     * @return 画面
+     */
+    @GetMapping("{id}/detail")
+    public String detail() {
+    	return "geppo/list";
+    }
+
+    /**
+     * 月報編集画面を表示します。
+     * @return 画面
+     */
+    @GetMapping("{id}/edit")
+    public String edit() {
+    	return "geppo/list";
+    }
+
+
+    /**
+     * 月報を更新します。
+     * @return 画面
+     */
+    @PostMapping("{id}/update")
+    public String update() {
+    	return "geppo/list";
+    }
+
+    /**
+     * 月報を削除します。
+     * @return 画面
+     */
+    @PostMapping("{id}/delete")
+    public String delete() {
+    	return "geppo/list";
+    }
+}

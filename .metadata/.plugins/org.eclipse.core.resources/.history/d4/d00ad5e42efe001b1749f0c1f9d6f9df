@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/layout::head(title='月報検索・一覧',stylesheets=~{::#stylesheets})">
+  <meta charset="UTF-8">
+  <title></title>
+  <th:block id="stylesheets">
+    <link rel="stylesheet" th:href="@{/css/geppo/list.css}">
+  </th:block>
+</head>
+
+<body th:replace="layouts/layout::body(breadcrumb=~{::#breadcrumb},contents=~{::#contents},scripts=~{::#scripts})">
+  <th:block id="scripts">
+    <script th:src="@{/js/geppo/list.js}"></script>
+  </th:block>
+  <th:block id="breadcrumb">月報検索・一覧</th:block>
+  <th:block id="contents">
+    <!-- コンテンツ領域  -->
+    <div class="form-group">
+      <a class="btn btn-primary btn-lg" href="/geppo/add">+ 月報登録</a>
+    </div>
+    <div class="card p-4">
+      <form action="/geppo/list" method="GET">
+        <div id="search-form">
+          <div class="form-group row">
+            <label for="id" class="col-form-label offset-sm-1 col-sm-2">月報番号</label>
+            <div class="col-sm-3"><input id="id" type="text" class="form-control" th:field="*{id}"></div>
+          </div>
+          <div class="form-group row">
+            <label for="writtenBy" class="col-form-label offset-sm-1 col-sm-2">作成者</label>
+            <div class="col-sm-3">
+              <select id="writtenBy" class="form-control" th:field="*{writtenBy}">
+                <option value="">-----</option>
+                <option th:each="account: ${accounts}" th:value="${account.id}" th:label="${account.getFullName()}"></option>
+              </select>
+            </div>
+            <label for="keyword" class="col-form-label offset-sm-1 col-sm-2">キーワード</label>
+            <div class="col-sm-3"><input id="keyword" type="text" class="form-control" th:field="*{keyword}"></div>
+          </div>
+          <div class="form-group row">
+            <label for="dateFrom" class="col-form-label offset-sm-1 col-sm-2">登録月FROM</label>
+            <div class="col-sm-3"><input id="dateFrom" type="date" class="form-control" th:field="*{dateFrom}"></div>
+            <label for="dateTo" class="col-form-label offset-sm-1 col-sm-2">登録月TO</label>
+            <div class="col-sm-3"><input id="dateTo" type="date" class="form-control" th:field="*{dateTo}"></div>
+          </div>
+          <div class="row">
+            <button type="submit" class="btn btn-primary btn-lg form-control offset-sm-5 col-sm-1">検索</button>
+            <button id="clear" type="button"
+              class="btn btn-secondary btn-lg form-control offset-sm-1 col-sm-1">クリア</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card" th:if="${!geppoSearchForm.isEmpty()}">
+      <div th:if="*{geppoRecords.isEmpty()}">検索結果が見つかりませんでした。</div>
+      <div th:unless="*{geppoRecords.isEmpty()}">
+        <div class="row">
+          <div class="ml-4">
+            <label class="col-form-label"
+              th:text="|検索結果 *{totalResultCount}件中 *{countFrom}-*{countFrom+geppoRecords.size()-1}件目|"></label>
+          </div>
+          <div class="ml-auto mr-4" th:insert="layouts/_pager::paginationbar(current=${pageNo},totalPage=*{(totalResultCount/20)+1})"></div>
+        </div>
+        <table class="table table-clickable table-hover">
+          <thead>
+            <tr>
+              <th scope="col">月報番号</th>
+              <th scope="col">作成者</th>
+              <th scope="col">月報内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="record,stat: *{geppoRecords}" th:object="${record}"
+              th:data-href="@{/geppo/{id}/detail(id=${record.id})}">
+              <td th:text="*{id}"></td>
+              <td th:text="*{writtenBy}"></td>
+              <td th:text="*{content}"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="ml-auto mr-4" th:include="layouts/_pager::paginationbar(current=${pageNo},totalPage=*{(totalResultCount/20)+1})"></div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+</body>
+
+</html>

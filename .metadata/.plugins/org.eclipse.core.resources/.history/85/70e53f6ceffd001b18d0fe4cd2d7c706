@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/layout::head(title='月報詳細',stylesheets=~{::#stylesheets})">
+  <meta charset="UTF-8">
+  <title></title>
+  <th:block id="stylesheets">
+    <link rel="stylesheet" th:href="@{/css/geppo/list.css}">
+  </th:block>
+</head>
+
+<body th:replace="layouts/layout::body(breadcrumb=~{::#breadcrumb},contents=~{::#contents},scripts=~{::#scripts})">
+  <th:block id="scripts">
+    <script th:src="@{/js/geppo/list.js}"></script>
+  </th:block>
+  <th:block id="breadcrumb"><a th:href="@{/geppo/list}">月報検索・一覧</a>>月報詳細</th:block>
+  <th:block id="contents">
+    <!-- コンテンツ領域  -->
+    <div class="card" th:object="${geppoForm}">
+      <div class="form-group row">
+        <label for="geppoNo" class="col-form-label col-sm-2">月報番号</label>
+        <label class="col-form-label" th:text="*{id}" th:field="id"></label>
+      </div>
+      <div class="form-group row">
+        <label for="writtenBy" class="col-form-label col-sm-2">作成者</label>
+        <label class="col-form-label" th:text="*{writtenBy}" th:field="writtenBy"></label>
+      </div>
+      <div class="form-group row">
+        <label for="targetDate" class="col-form-label col-sm-2">対象日</label>
+        <label class="col-form-label" th:text="*{#temporals.format(targetDate, 'yyyy/MM/dd')}" th:field="targetDate"></label>
+      </div>
+      <div class="form-group row">
+        <label for="categoryName" class="col-form-label col-sm-2">カテゴリー</label>
+        <label class="col-form-label" th:text="*{categoryName}" th:field="categoryName"></label>
+      </div>
+      <div class="form-group row">
+        <label for="content" class="col-form-label col-sm-2">月報内容</label>
+        <label class="col-form-label pre-line" th:text="*{content}" th:field="content"></label>
+      </div>
+      <div class="form-group row">
+        <label for="lastUpdated" class="col-form-label col-sm-2">最終更新日時</label>
+        <label class="col-form-label" th:text="*{#temporals.format(lastUpdated, 'yyyy/MM/dd HH:mm:ss')}" th:field="lastUpdated"></label>
+      </div>
+      <div class="row">
+        <a th:if="*{editable}" class="btn btn-primary btn-lg form-control offset-sm-5 col-sm-1" th:href="@{/geppo/{id}/edit(id=*{id})}">更新</a>
+        <div th:unless="*{editable}" class="col-sm-5"></div>
+        <a class="btn btn-secondary btn-lg form-control offset-sm-1 col-sm-1" th:href="@{/geppo/list}">戻る</a>
+        <div class="offset-sm-2 col-sm-1 p-0">
+          <button type="button" class="btn btn-danger btn-lg form-control " data-toggle="modal" data-target="#deleteConfirmModal">削除</button>
+        </div>
+      </div>
+    </div>
+    <div th:replace="layouts/modal::confirm(
+        modalId='deleteConfirmModal',
+        titleText='削除確認',
+        bodyText='削除してもよろしいですか',
+        confirmButton=~{::#deleteConfirm})">
+      <button type="button" id="deleteConfirm" class="btn btn-danger" data-target-form="#deleteForm">削除</button>
+    </div>
+    <form id="deleteForm" th:action="@{/geppo/{id}/delete(id=${nippoForm.id})}" method="post"></form>
+  </th:block>
+</body>
+
+</html>

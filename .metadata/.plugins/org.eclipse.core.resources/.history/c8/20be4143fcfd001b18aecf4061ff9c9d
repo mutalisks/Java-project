@@ -1,0 +1,10 @@
+package jp.co.plise.geppo.model.form;
+
+public class GeppoForm {
+
+	public Long getCategoryId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

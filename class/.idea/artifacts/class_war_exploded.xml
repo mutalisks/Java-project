@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="class:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/class_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="class" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="commons-fileupload-1.2.1.jar" module-name="class" />
+          <element id="library" level="module" name="commons-io-1.3.2.jar" module-name="class" />
+          <element id="library" level="module" name="json_simple-1.1.jar" module-name="class" />
+          <element id="library" level="module" name="jspsmartupload.jar" module-name="class" />
+          <element id="library" level="module" name="jxl.jar" module-name="class" />
+          <element id="library" level="module" name="msbase.jar" module-name="class" />
+          <element id="library" level="module" name="mssqlserver.jar" module-name="class" />
+          <element id="library" level="module" name="msutil.jar" module-name="class" />
+          <element id="library" level="module" name="mysql-connector-java-5.0.4-bin.jar" module-name="class" />
+          <element id="library" level="module" name="sqljdbc.jar" module-name="class" />
+          <element id="library" level="module" name="sqljdbc4.jar" module-name="class" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="class/web/Web" />
+    </root>
+  </artifact>
+</component>

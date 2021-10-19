@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<!-- /* すべてのページに読み込ませる必要のないJavaScriptを定義する */ -->
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+  <!-- 高機能なセレクトボックス -->
+  <th:block th:fragment="select2">
+    <script th:src="@{/dist/select2/js/select2.min.js}"></script>
+    <script th:src="@{/dist/select2/js/i18n/ja.js}"></script>
+  </th:block>
+</body>
+</html>

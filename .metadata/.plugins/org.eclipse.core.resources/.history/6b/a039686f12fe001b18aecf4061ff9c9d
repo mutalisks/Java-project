@@ -1,0 +1,80 @@
+package jp.co.plise.geppo.service;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import javax.persistence.EntityNotFoundException;
+
+import jp.co.plise.geppo.entity.Account;
+import jp.co.plise.geppo.entity.GeppoCategory;
+import jp.co.plise.geppo.entity.GeppoRecord;
+import jp.co.plise.geppo.model.form.GeppoForm;
+import jp.co.plise.geppo.model.form.GeppoSearchForm;
+import jp.co.plise.geppo.repository.GeppoCategoryRepository;
+import jp.co.plise.geppo.repository.GeppoRecordRepository;
+
+/**
+ * 月報サービス
+ */
+@Service
+public class GeppoService {
+	
+	@Autowired
+    private GeppoCategoryRepository geppoCategoryRepository;
+
+    @Autowired
+    private GeppoRecordRepository geppoRecordRepository;
+    
+    /** 月報一覧1ページあたりの表示件数 */
+    private static final int NUMBER_PER_PAGE = 10;
+
+	public GeppoForm add() {
+		GeppoForm tempForm = new GeppoForm();
+		return tempForm;
+	}
+	
+	@Transactional
+	public GeppoRecord create(Account account, GeppoForm geppoForm) {
+		GeppoRecord geppoRecord = geppoRecordRepository.save(convertToEntity(account,geppoForm));
+		return geppoRecord;
+	}
+
+	private GeppoRecord convertToEntity(Account account, GeppoForm geppoForm) {
+		GeppoCategory geppoCategory = geppoCategoryRepository.findById(geppoForm.getCategoryId()).orElseThrow(EntityNotFoundException::new);
+        GeppoRecord record = new GeppoRecord();
+        record.setAccount(account);
+        record.setTargetDate(geppoForm.getTargetMonth());
+        record.setGeppoCategory(geppoCategory);
+        record.setContent(geppoForm.getContent());
+        record.setDeleted(false);
+        return record;
+	}
+
+	public GeppoForm detail(Long accountId, Long id) {
+		GeppoRecord record = geppoRecordRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return convertEntityToForm(accountId, record);
+	}
+
+	private GeppoForm convertEntityToForm(Long accountId, GeppoRecord record) {
+		GeppoForm geppoForm = new GeppoForm();
+		geppoForm.setId(record.getId());
+		return null;
+	}
+
+	public GeppoRecord update(Long id, GeppoForm form) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void delete(Long id, Long id2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public GeppoForm searchGeppo(GeppoSearchForm searchForm, int pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

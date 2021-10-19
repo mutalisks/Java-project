@@ -1,0 +1,28 @@
+
+-- アカウント種別
+insert into account_type (name) values
+('管理者'),
+('社員'),
+('スタッフ');
+
+-- アカウント
+insert into account (password, last_name, first_name, account_type_id) values
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '01', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '02', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '03', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '04', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '05', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '06', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '07', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '08', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '09', 3),
+('5f4dcc3b5aa765d61d8327deb882cf99', 'ユーザー', '10', 3);
+
+-- 月報カテゴリー
+insert into nippo_category (name, sort_order) values
+('カテゴリー1', 10),
+('カテゴリー2', 20),
+('カテゴリー3', 30),
+('カテゴリー4', 40),
+('カテゴリー5', 50);
+

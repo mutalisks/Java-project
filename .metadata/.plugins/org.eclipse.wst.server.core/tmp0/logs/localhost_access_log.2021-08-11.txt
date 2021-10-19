@@ -1,0 +1,5 @@
+127.0.0.1 - - [11/Aug/2021:22:41:30 +0900] "GET / HTTP/1.1" 404 901
+0:0:0:0:0:0:0:1 - - [11/Aug/2021:22:41:31 +0900] "GET /web-customer-tracker-E/TestDbServlet HTTP/1.1" 200 118
+127.0.0.1 - - [11/Aug/2021:22:47:24 +0900] "GET / HTTP/1.1" 404 901
+0:0:0:0:0:0:0:1 - - [11/Aug/2021:22:47:25 +0900] "GET /web-customer-tracker-E/ HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [11/Aug/2021:22:47:35 +0900] "GET /web-customer-tracker-E/customer/list HTTP/1.1" 200 139
